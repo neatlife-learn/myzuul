@@ -1,0 +1,72 @@
+{
+  "kind": "DaemonSet",
+  "apiVersion": "extensions/v1beta1",
+  "metadata": {
+    "name": "myzuul",
+    "namespace": "default",
+    "labels": {
+      "k8s-app": "myzuul"
+    },
+    "annotations": {
+      "deployment.kubernetes.io/revision": "2"
+    }
+  },
+  "spec": {
+    "selector": {
+      "matchLabels": {
+        "k8s-app": "myzuul"
+      }
+    },
+    "template": {
+      "metadata": {
+        "name": "myzuul",
+        "labels": {
+          "k8s-app": "myzuul"
+        }
+      },
+      "spec": {
+        "containers": [
+        {
+          "name": "myzuul",
+          "ports": [
+          {
+            "containerPort": 8080,
+            "hostPort": 8080,
+            "name": "8080tcp80800",
+            "protocol": "TCP"
+          }
+          ],
+          "image": "#gateway-image#",
+          "readinessProbe": {
+            "httpGet": {
+              "scheme": "HTTP",
+              "path": "/actuator/info",
+              "port": 8080
+            },
+            "initialDelaySeconds": 10,
+            "periodSeconds": 5
+          },
+          "resources": {
+
+          },
+          "terminationMessagePath": "/dev/termination-log",
+          "terminationMessagePolicy": "File",
+          "imagePullPolicy": "Always",
+          "securityContext": {
+            "privileged": false,
+            "procMount": "Default"
+          }
+        }
+        ],
+        "restartPolicy": "Always",
+        "terminationGracePeriodSeconds": 30,
+        "dnsPolicy": "ClusterFirst",
+        "securityContext": {
+
+        },
+        "schedulerName": "default-scheduler"
+      }
+    },
+    "revisionHistoryLimit": 10
+  }
+}
