@@ -19,7 +19,7 @@ public class CertificationFilter extends ZuulFilter {
     public Object run() {
         HttpServletRequest request = RequestContext.getCurrentContext().getRequest();
         // 到redis中检查token是否存在
-        if ("21232f297a57a5a743894a0e4a801fc3".equals(request.getParameter("token"))) {
+        if ("mytoken".equals(request.getParameter("token"))) {
             return null;
         }
         throw new ZuulRuntimeException(new ZuulException("未授权用户禁止访问", 200, "token校验失败"));

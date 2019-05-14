@@ -24,7 +24,7 @@ public class AuthorizationController {
         // 到数据中检查用户名和密码是否合法
         if ("admin".equals(username) && "admin".equals(password)) {
             // 生成token，保存到redis中
-            token = "21232f297a57a5a743894a0e4a801fc3";
+            token = "mytoken";
         } else {
             throw new RuntimeException("用户名或密码错误");
         }

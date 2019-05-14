@@ -67,6 +67,12 @@
         "schedulerName": "default-scheduler"
       }
     },
+    "updateStrategy": {
+      "type": "RollingUpdate",
+      "rollingUpdate": {
+        "maxUnavailable": 1
+      }
+    },
     "revisionHistoryLimit": 10
   }
 }
